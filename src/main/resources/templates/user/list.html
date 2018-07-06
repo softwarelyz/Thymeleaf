@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/layout2">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <!--<script th:src="@{/js/cs.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>-->
+</head>
+<body>
+    <span layout:fragment="bread">用户列表</span>
+    <div layout:fragment="content">
+        <!--<h3 th:text="${userModel.title}"></h3>-->
+        <!--<div>
+            <a th:href="@{/users/form}">创建用户</a>
+        </div>-->
+        <table class="table table-bg table-hover table-dark table-striped">
+            <thead>
+                <tr>
+                    <td>id</td>
+                    <td>name</td>
+                    <td>email</td>
+                    <td>编辑</td>
+                </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${userModel.userList.size()} eq 0">
+                <td colspan="5">没有用户信息!<a th:href="@{/users/form}" >添加用户</a></td>
+            </tr>
+            <tr th:each="user : ${userModel.userList}">
+                <td th:text="${user.id}"></td>
+                <td ><a th:href="@{'/users/'+${user.id}}" th:text="${user.name}"></a></td>
+                <td th:text="${user.email}"></td>
+                <td>
+                    <a th:href="@{'/users/delete/'+${user.id}}">删除</a>
+                    <a th:href="@{'/users/modify/'+${user.id}}">修改</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/users/form}" class="btn btn-dark mt-2 offset-sm-5 offset-lg-0">添加用户</a>
+
+    </div>
+
+</body>
+
+</html>
